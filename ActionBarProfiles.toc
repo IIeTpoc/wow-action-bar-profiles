@@ -1,14 +1,13 @@
-## Interface: 90001
+## Interface: 100000
 ## Title: Action Bar Profiles
 ## Author: silencer2k@gmail.com
 ## SavedVariables: ActionBarProfilesDBv3
-## Version: 9.0.1-2
+## Version: 10.0.0-1
 
 ActionBarProfiles.xml
 
 locales\enUS.lua
 locales\ruRU.lua
-
 locales\deDE.lua
 locales\esES.lua
 locales\esMX.lua
@@ -30,3 +29,4 @@ GUI.xml
 GUI.lua
 GUISave.xml
 GUISave.lua
+Button.xml

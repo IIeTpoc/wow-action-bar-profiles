@@ -63,12 +63,7 @@ function addon:OnInitialize()
 
     -- char frame
     if PaperDollActionBarProfilesPane then
-        self:InjectPaperDollSidebarTab(
-            L.charframe_tab,
-            "PaperDollActionBarProfilesPane",
-            "Interface\\AddOns\\ActionBarProfiles\\textures\\CharDollBtn",
-            { 0, 0.515625, 0, 0.13671875 }
-        )
+        self:InjectPaperDollSidebarTab(L.charframe_tab, "PaperDollActionBarProfilesPane")
 
         PaperDollActionBarProfilesPane:OnInitialize()
         PaperDollActionBarProfilesSaveDialog:OnInitialize()
@@ -366,15 +361,13 @@ function addon:RestorePetJournalFilters(saved)
     end
 end
 
-function addon:InjectPaperDollSidebarTab(name, frame, icon, texCoords)
+function addon:InjectPaperDollSidebarTab(name, frame)
     local tab = #PAPERDOLL_SIDEBARS + 1
 
-    PAPERDOLL_SIDEBARS[tab] = { name = name, frame = frame, icon = icon, texCoords = texCoords, IsActive = function() return true end }
+    -- PAPERDOLL_SIDEBARS[tab] = { name = name, frame = frame, icon = icon, texCoords = texCoords, IsActive = function() return true end }
 
-    CreateFrame(
-        "Button", "PaperDollSidebarTab" .. tab, PaperDollSidebarTabs,
-        "PaperDollSidebarTabTemplate", tab
-    )
+    local button = CreateFrame("Button", "PaperDollSidebarTab" .. tab, PaperDollSidebarTabs, "PaperDollActionBarProfilesButton", tab)
+	button:SetPoint("RIGHT", PaperDollSidebarTab1, "LEFT", -4, 0)
 
     self:LineUpPaperDollSidebarTabs()
 
