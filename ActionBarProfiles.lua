@@ -7,6 +7,17 @@ local DEBUG = "|cffff0000Debug:|r "
 
 local qtip = LibStub("LibQTip-1.0")
 
+local origGetPaperDollSideBarFrame
+local ABP_tabNum
+
+function ABP_GetPaperDollSideBarFrame(index)
+    if index == ABP_tabNum then
+        return PaperDollActionBarProfilesPane;
+    else
+        return origGetPaperDollSideBarFrame(index);
+    end
+end
+
 function addon:cPrintf(cond, ...)
     if cond then self:Printf(...) end
 end
@@ -61,6 +72,9 @@ function addon:OnInitialize()
     self.icon = LibStub("LibDBIcon-1.0")
     self.icon:Register(addonName, self.ldb, self.db.profile.minimap)
 
+    origGetPaperDollSideBarFrame = GetPaperDollSideBarFrame
+    GetPaperDollSideBarFrame = ABP_GetPaperDollSideBarFrame
+	
     -- char frame
     if PaperDollActionBarProfilesPane then
         self:InjectPaperDollSidebarTab(L.charframe_tab, "PaperDollActionBarProfilesPane")
@@ -363,6 +377,10 @@ end
 
 function addon:InjectPaperDollSidebarTab(name, frame)
     local tab = #PAPERDOLL_SIDEBARS + 1
+	
+	    ABP_tabNum = tab
+
+    PAPERDOLL_SIDEBARS[tab] = { name = name, icon = icon, texCoords = texCoords, IsActive = function() return true end }
 
     -- PAPERDOLL_SIDEBARS[tab] = { name = name, frame = frame, icon = icon, texCoords = texCoords, IsActive = function() return true end }
 
