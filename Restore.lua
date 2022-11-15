@@ -130,6 +130,10 @@ function addon:RestoreMacros(profile, check, cache, res)
                         ok = true
 
                     elseif (global and all < MAX_ACCOUNT_MACROS) or (not global and char < MAX_CHARACTER_MACROS) then
+                        if strsub(body, 0, 12) == "#showtooltip" then
+                            icon = "INV_Misc_QuestionMark"
+                        end
+
                         if check or CreateMacro(name, icon, body, not global) then
                             ok = true
                             self:UpdateCache(macros, -1, self:PackMacro(body), name)
@@ -172,6 +176,10 @@ function addon:RestoreMacros(profile, check, cache, res)
                         ok = true
 
                     elseif (global and all < MAX_ACCOUNT_MACROS) or (not global and char < MAX_CHARACTER_MACROS) then
+                        if strsub(body, 0, 12) == "#showtooltip" then
+                            icon = "INV_Misc_QuestionMark"
+                        end
+                        
                         if check or CreateMacro(name, icon, body, not global) then
                             ok = true
                             self:UpdateCache(macros, -1, self:PackMacro(body), name)
